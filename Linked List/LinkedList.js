@@ -78,7 +78,7 @@ constructor(comparatorFunction){
             if(callback && callback(currentNode.value)){
                 return currentNode
             }
-console.log("currentNode.value",currentNode.value, this.compare.equal(currentNode.value, value))
+
             if(value != undefined && this.compare.equal(currentNode.value, value)){
                 return currentNode
             }
@@ -152,14 +152,21 @@ console.log("currentNode.value",currentNode.value, this.compare.equal(currentNod
     reverse(){
         let previousNode = null;
         let currentNode = this.head;
+        let nextNode    = null;
 
         while(currentNode){
+            nextNode = currentNode.next;
+
             currentNode.next = previousNode;
+            
             previousNode = currentNode;
-            currentNode = currentNode.next
+            currentNode = nextNode
         }
 
+        this.tail = this.head;
         this.head = previousNode
+
+        return this;
     }
 }
 
@@ -168,7 +175,10 @@ function main(){
     ll.prepend(1);
     ll.append(2);
     console.log(ll.toArrayFromLinkedList())
-    console.log(ll.find(2))
+    console.log(ll.find(2));
+    console.log(ll.toArrayFromLinkedList())
+    ll.reverse();
+    console.log(ll.toArrayFromLinkedList())
     return;
 };
 
